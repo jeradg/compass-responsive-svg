@@ -1,0 +1,46 @@
+// SASS/Compass responsive SVG mixin
+// Copyright (C) 2013 Jerad Gallinger
+// Released under the GPLv3 license. http://www.gnu.org/licenses
+
+// http://jeradgallinger.ca
+// https://github.com/jeradg/compass-responsive-svg
+
+// ---------------------------------
+
+// Requires Modernizr SVG detection and Compass.
+
+// $img-name refers to an SVG in the img/svg-src/ folder (where 'img' is your Compass project's image folder), 
+// and a corresponding PNG in the img/png-src/svg-png-fallbacks folder.
+
+// Creates an inline SVG background image in the CSS, with fallback to a PNG sprite.
+
+// Note: Don't put quote marks around $img-name.
+
+// Takes one required parameter, ``$img-name`` (the image's name, without the file extension), and two optional parameters:
+
+// - ``$set-dimensions``: If ``true``, uses the PNG's height and width to set the height and width of the selector in which 
+//   the mixin is called. If ``false``, the mixin doesn't set the selector's dimensions. (Default: ``true``.)
+
+// - ``$image-replace``: If ``true``, uses ``text-indent: -9999px`` to replace text with the image. 
+//   If false, doesn't hide text. (Default: ``true``.)
+
+$svg-png-fallbacks: sprite-map( "png-src/svg-png-fallbacks/*.png", $spacing: 20px );
+
+@mixin responsive-svg( $img-name, $set-dimensions: true, $image-replace: true ) {
+  @if $set-dimensions {
+    width: image-width( "png-src/#{ $img-name }.png" );
+    height: image-height( "png-src/#{ $img-name }.png" );
+  }
+  @if $image-replace {
+    text-indent: -9999px;
+  }
+  .js.svg & {
+    background-image: inline-image( "svg-src/#{ $img-name }.svg" );
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .no-svg &,
+  .no-js & {
+    background: $svg-png-fallbacks no-repeat sprite-position( $svg-png-fallbacks, #{ $img-name }, 0, 0 );
+  }
+}
