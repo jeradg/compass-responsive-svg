@@ -28,8 +28,8 @@ $svg-png-fallbacks: sprite-map( "png-src/svg-png-fallbacks/*.png", $spacing: 20p
 
 @mixin responsive-svg( $img-name, $set-dimensions: true, $image-replace: true ) {
   @if $set-dimensions {
-    width: image-width( "png-src/#{ $img-name }.png" );
-    height: image-height( "png-src/#{ $img-name }.png" );
+    width: image-width( "png-src/svg-png-fallbacks/#{ $img-name }.png" );
+    height: image-height( "png-src/svg-png-fallbacks/#{ $img-name }.png" );
   }
   @if $image-replace {
     text-indent: -9999px;
