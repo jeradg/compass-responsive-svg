@@ -1,4 +1,5 @@
 // SASS/Compass responsive SVG mixin
+// Version 0.1.0
 // Copyright (C) 2013 Jerad Gallinger
 // Released under the GPLv3 license. http://www.gnu.org/licenses
 
@@ -7,10 +8,10 @@
 
 // ---------------------------------
 
-// Requires Modernizr SVG detection and Compass.
+// Requires Modernizr inline SVG detection and Compass.
 
 // $img-name refers to an SVG in the img/svg-src/ folder (where 'img' is your Compass project's image folder), 
-// and a corresponding PNG in the img/png-src/svg-png-fallbacks folder.
+// and a corresponding PNG in the img/svg-png-fallbacks/ folder.
 
 // Creates an inline SVG background image in the CSS, with fallback to a PNG sprite.
 
@@ -24,23 +25,24 @@
 // - ``$image-replace``: If ``true``, uses ``text-indent: -9999px`` to replace text with the image. 
 //   If false, doesn't hide text. (Default: ``true``.)
 
-$svg-png-fallbacks: sprite-map( "png-src/svg-png-fallbacks/*.png", $spacing: 20px );
+$svg-png-fallbacks: sprite-map( "svg-png-fallbacks/*.png", $spacing: 20px );
 
 @mixin responsive-svg( $img-name, $set-dimensions: true, $image-replace: true ) {
   @if $set-dimensions {
-    width: image-width( "png-src/svg-png-fallbacks/#{ $img-name }.png" );
-    height: image-height( "png-src/svg-png-fallbacks/#{ $img-name }.png" );
+    width: image-width( "svg-png-fallbacks/#{ $img-name }.png" );
+    height: image-height( "svg-png-fallbacks/#{ $img-name }.png" );
   }
   @if $image-replace {
     text-indent: -9999px;
   }
-  .js.svg & {
+  .js.inlinesvg & {
     background-image: inline-image( "svg-src/#{ $img-name }.svg" );
     background-repeat: no-repeat;
     background-position: center;
   }
-  .no-svg &,
+  .no-inlinesvg &,
   .no-js & {
-    background: $svg-png-fallbacks no-repeat sprite-position( $svg-png-fallbacks, #{ $img-name }, 0, 0 );
+    background: $svg-png-fallbacks no-repeat sprite-position( $svg-png-fallbacks, #{ $img-name }, 0, 0 ) ;
+    background-size: image-width( sprite-path( $svg-png-fallbacks ) ) image-height( sprite-path( $svg-png-fallbacks ) );
   }
 }

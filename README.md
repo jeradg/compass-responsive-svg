@@ -8,13 +8,13 @@ This is a Compass mixin for responsive inline SVGs with PNG sprite fallbacks. Th
 
 ## Requires
 
-The mixin requires [[Modernizr]](http://modernizr.com/ "Modernizr") SVG detection and [[Compass]](http://compass-style.org/ "Compass").
+The mixin requires [[Modernizr]](http://modernizr.com/ "Modernizr") inline SVG detection and [[Compass]](http://compass-style.org/ "Compass").
 
 ## Using the mixin
 
 ``@import`` the mixin in your style.scss file.
 
-Place an SVG in the ``img/svg-src/`` folder (where 'img' is your Compass project's image folder), and a corresponding PNG in the ``img/png-src/svg-png-fallbacks`` folder. (E.g., ``my-image.svg`` and ``my-image.png``.)
+Place an SVG in the ``img/svg-src`` folder (where 'img' is your Compass project's image folder), and a corresponding PNG in the ``img/svg-png-fallbacks`` folder. (E.g., ``my-image.svg`` and ``my-image.png``.)
 
 ### Default usage
 
